@@ -1,0 +1,65 @@
+version: '3'
+services:
+
+  mongocliente:
+    image: mongoclient/mongoclient
+    restart: always
+    container_name: mongoclient
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+      - postgres-network
+
+  mongo:
+    image: mongo:4
+    restart: always
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "admin"
+      MONGO_INITDB_ROOT_PASSWORD: "mongo"
+    ports:
+      - "27018:27017"
+    restart: always
+    networks:
+      - postgres-network  
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: "Postgres2019!"
+    container_name: postgres
+    ports:
+      - "15432:5432"
+    restart: always
+    volumes:
+      - './pgadmin:/var/lib/postgresql/data' 
+    networks:
+      - postgres-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgAdmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "andre@yahoo.com"
+      PGADMIN_DEFAULT_PASSWORD: "PgAdmin2019!"
+    container_name: pgadmin
+    ports:
+      - "16543:80"
+    restart: always  
+    depends_on:
+      - postgres
+    networks:
+      - postgres-network
+
+networks: 
+  postgres-network:
+    driver: bridge      
+      
+
+
+
+
