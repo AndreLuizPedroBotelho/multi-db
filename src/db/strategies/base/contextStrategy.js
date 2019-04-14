@@ -1,6 +1,6 @@
 const Icrud = require('./../interfaces/interfaceCrud')
 
-class ContextStrategy extends Icrud{
+class ContextStrategy extends Icrud {
     constructor(strategy) {
         super();
         this._database = strategy;
@@ -10,8 +10,8 @@ class ContextStrategy extends Icrud{
         return this._database.create(item);
     }
 
-    read(query) {
-        return this._database.read(query);
+    read(item, skip, limit) {
+        return this._database.read(item, skip, limit);
     }
 
     update(id, item) {
@@ -21,12 +21,12 @@ class ContextStrategy extends Icrud{
     delete(id) {
         return this._database.delete(id);
     }
-    
-    isConnected(){
+
+    isConnected() {
         return this._database.isConnected();
     }
-    
-    connect(){
+
+    connect() {
         return this._database.connect();
     }
 

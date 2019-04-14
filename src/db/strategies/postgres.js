@@ -71,7 +71,7 @@ class Postgres extends ICrud {
             'Postgres2019!',
             {
                 host: 'localhost',
-                port: 15432,
+                port: 1568,
                 dialect: 'postgres',
                 quoteIdentifiers: false,
                 operatorsAliases: false
